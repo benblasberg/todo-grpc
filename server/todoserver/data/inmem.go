@@ -3,6 +3,8 @@ package data
 import (
 	"errors"
 	"sync"
+
+	"github.com/pborman/uuid"
 )
 
 //MemStore is an in-memory implementation of the todo datastore interface
@@ -22,6 +24,8 @@ func (m *MemStore) AddTodo(task *Task) error {
 	if _, ok := m.data[task.Id]; ok {
 		return errors.New("Task with id " + task.Id + " already exists")
 	}
+
+	task.Id = uuid.New()
 
 	m.data[task.Id] = task
 	return nil
