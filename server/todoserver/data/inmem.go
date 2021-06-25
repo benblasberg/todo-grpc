@@ -5,17 +5,17 @@ import (
 	"sync"
 )
 
-//memstore is an in-memory implementation of the todo datastore interface
-type memstore struct {
+//MemStore is an in-memory implementation of the todo datastore interface
+type MemStore struct {
 	data map[string]*Task
 	mu   sync.Mutex
 }
 
-func NewInMemoryDataStore() memstore {
-	return memstore{data: make(map[string]*Task)}
+func NewInMemoryDataStore() *MemStore {
+	return &MemStore{data: make(map[string]*Task)}
 }
 
-func (m *memstore) AddTodo(task *Task) error {
+func (m *MemStore) AddTodo(task *Task) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
@@ -27,7 +27,7 @@ func (m *memstore) AddTodo(task *Task) error {
 	return nil
 }
 
-func (m *memstore) GetTasks() (*[]Task, error) {
+func (m *MemStore) GetTasks() (*[]Task, error) {
 	var tasks []Task
 
 	m.mu.Lock()
