@@ -5,4 +5,9 @@ generate:
 get:
 	go get ./...
 build: get
-	go build ./...
+	echo "Building server..."
+	GGO_ENABLED=0 GOOS=linux go build -o bin/linux/server ./server/main.go
+	GGO_ENABLED=0 GOOS=darwin go build -o bin/macos/server ./server/main.go
+run: build
+	echo "Standing up server..."
+	docker-compose -p grpc-todoserver -f ./docker-compose.yml up --build

@@ -33,7 +33,7 @@ func (s server) AddTask(ctx context.Context, in *pb.AddTaskRequest) (*pb.AddTask
 		return nil, err
 	}
 
-	time.Sleep(time.Duration((rand.Intn(499) + 1) * int(time.Millisecond)))
+	time.Sleep(time.Duration((rand.Intn(199) + 1) * int(time.Millisecond)))
 
 	return &pb.AddTaskResponse{Id: t.Id}, nil
 }
@@ -49,7 +49,7 @@ func (s server) GetTasks(ctx context.Context, in *pb.GetTasksRequest) (*pb.GetTa
 		respTasks = append(respTasks, &pb.Task{Id: t.Id, Title: t.Title, Description: t.Description})
 	}
 
-	time.Sleep(time.Duration((rand.Intn(499) + 1) * int(time.Millisecond)))
+	time.Sleep(time.Duration((rand.Intn(99) + 1) * int(time.Millisecond)))
 
 	return &pb.GetTasksResponse{Tasks: respTasks}, nil
 }
