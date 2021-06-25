@@ -19,7 +19,7 @@ func New(store data.DataStore) pb.TodoServiceServer {
 
 var ErrInvalidArgument = errors.New("invalid argument received")
 
-func (s *server) AddTodo(ctx context.Context, in *pb.AddTaskRequest) (*pb.AddTaskResponse, error) {
+func (s server) AddTask(ctx context.Context, in *pb.AddTaskRequest) (*pb.AddTaskResponse, error) {
 	if in.Title == "" || in.Description == "" {
 		return nil, ErrInvalidArgument
 	}
