@@ -3,6 +3,8 @@ package server
 import (
 	"context"
 	"errors"
+	"math/rand"
+	"time"
 
 	"bb.com/todo/grpc/server/todoserver/data"
 	pb "bb.com/todo/grpc/todo"
@@ -31,6 +33,8 @@ func (s server) AddTask(ctx context.Context, in *pb.AddTaskRequest) (*pb.AddTask
 		return nil, err
 	}
 
+	time.Sleep(time.Duration((rand.Intn(499) + 1) * int(time.Millisecond)))
+
 	return &pb.AddTaskResponse{Id: t.Id}, nil
 }
 
@@ -44,6 +48,8 @@ func (s server) GetTasks(ctx context.Context, in *pb.GetTasksRequest) (*pb.GetTa
 	for _, t := range *tasks {
 		respTasks = append(respTasks, &pb.Task{Id: t.Id, Title: t.Title, Description: t.Description})
 	}
+
+	time.Sleep(time.Duration((rand.Intn(499) + 1) * int(time.Millisecond)))
 
 	return &pb.GetTasksResponse{Tasks: respTasks}, nil
 }
